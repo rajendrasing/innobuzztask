@@ -22,6 +22,32 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
         binding.getPermission.setOnClickListener(this)
+
+
+        binding.edPassword.setOnTouchListener(OnTouchListener { view, motionEvent ->
+            val DRABLE_LEFT = 0
+            val DRABLE_TOP = 1
+            val DRABLE_RIGHT = 2
+            val DRABLE_BOTTOM = 3
+            if (motionEvent.action == MotionEvent.ACTION_UP) {
+                if (motionEvent.rawX >= binding.edPassword.getRight() -
+                    binding.edPassword.getCompoundDrawables().get(DRABLE_RIGHT).getBounds().width()
+                ) {
+                    if (showPassword==true){
+                        showPassword = false
+                        binding.edPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                        binding.edPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off_24, 0)
+                    }else if (showPassword==false){
+                        showPassword=true
+                        binding.edPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                        binding.edPassword.setCompoundDrawables(null,null,null,null)
+                        binding.edPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_24, 0)
+                    }
+                    return@OnTouchListener true
+                }
+            }
+            false
+        })
     }
 
     override fun onClick(view: View?) {
