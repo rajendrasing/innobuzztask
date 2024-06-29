@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
         binding.getPermission.setOnClickListener(this)
 
+        //Line First
 
         binding.edPassword.setOnTouchListener(OnTouchListener { view, motionEvent ->
             val DRABLE_LEFT = 0
